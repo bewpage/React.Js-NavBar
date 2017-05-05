@@ -1,0 +1,20 @@
+nav {
+  background-color: #ababab;
+  padding: 1em;
+  border-bottom: 1px solid #ababab;
+  height: 35px; }
+  nav i:hover {
+    opacity: 0.6; }
+
+.nav-mobile {
+  list-style: none;
+  padding: 0 2em;
+  color: #ababab; }
+
+.nav-normal {
+  list-style: none;
+  display: inline-block;
+  padding: 0 2em;
+  color: #ffffff; }
+
+/*# sourceMappingURL=style.css.map */

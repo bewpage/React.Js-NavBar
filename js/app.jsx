@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 windowWidth: window.innerWidth,
                 mobileNavVisible: false,
                 items: {data},
+                addClass: '',
             };
             console.log(window.innerWidth)
         };
@@ -29,10 +30,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
         componentDidMount() {
             window.addEventListener('resize', this.handleResize=()=>{this.setState({windowWidth: window.innerWidth})});
+            window.addEventListener('resize', this.handleResize=()=>{this.setState({mobileNavVisible: false})});
         }
 
         componentWillUnmount(){
             window.removeEventListener('resize', this.handleResize=()=>{this.setState({windowWidth: window.innerWidth})});
+            window.removeEventListener('resize', this.handleResize=()=>{this.setState({mobileNavVisible: false})});
         }
 
 
@@ -46,35 +49,45 @@ document.addEventListener('DOMContentLoaded', function(){
                     mobileNavVisible: false,
                 });
             }
-
           console.log('you clicked me ... ' +  this.state.mobileNavVisible);
         };
 
         navigationLinks(){
             let item = this.state.items.data;
+            let newClass = this.state.addClass;
             let arrayMenu = [];
             item.map((value, i)=>{
-                arrayMenu.push(<li key={i}>{value.text} - {value.url}</li>);
+                arrayMenu.push(<li className="nav-normal" key={i}>{value.text} - {value.url}</li>);
             });
-                    return arrayMenu;
+            return arrayMenu;
         }
 
         renderMobileNav() {
-            if(this.state.mobileNavVisible) {
-                return this.navigationLinks();
+            if(this.state.mobileNavVisible){
+                let item = this.state.items.data;
+                let newClass = this.state.addClass;
+                let arrayMenu = [];
+                item.map((value, i)=>{
+                    arrayMenu.push(<li key={i}>{value.text} - {value.url}</li>);
+                });
+                return arrayMenu;
             }
         }
 
         renderNavigation() {
             if(this.state.windowWidth <= 800) {
                 return <div>
-                        <p onClick={e=>this.handleNavClick(e)}><i>mobile view - will be burger here</i></p>
-                        {this.renderMobileNav()}
+                            <i onClick={e=>this.handleNavClick(e)} className="fa fa-bars fa-2x" aria-hidden="true"></i>
+                            <ul className="nav-mobile">
+                                {this.renderMobileNav()}
+                            </ul>
                     </div>
                 ;
             } else {
                 return <div>
-                        {this.navigationLinks()}
+                            <ul>
+                                {this.navigationLinks()}
+                            </ul>
                     </div>
                 ;
             }
@@ -83,10 +96,9 @@ document.addEventListener('DOMContentLoaded', function(){
         render() {
             return (
                 <div>
-                    <div>
-                        <li>Web Title</li>
+                    <nav>
                         {this.renderNavigation()}
-                    </div>
+                    </nav>
                 </div>
             );
         }

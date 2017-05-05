@@ -12725,7 +12725,8 @@ document.addEventListener('DOMContentLoaded', function () {
             _this.state = {
                 windowWidth: window.innerWidth,
                 mobileNavVisible: false,
-                items: { data: _data2.default }
+                items: { data: _data2.default },
+                addClass: ''
             };
             console.log(window.innerWidth);
             return _this;
@@ -12751,6 +12752,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.addEventListener('resize', this.handleResize = function () {
                     _this2.setState({ windowWidth: window.innerWidth });
                 });
+                window.addEventListener('resize', this.handleResize = function () {
+                    _this2.setState({ mobileNavVisible: false });
+                });
             }
         }, {
             key: 'componentWillUnmount',
@@ -12759,6 +12763,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 window.removeEventListener('resize', this.handleResize = function () {
                     _this3.setState({ windowWidth: window.innerWidth });
+                });
+                window.removeEventListener('resize', this.handleResize = function () {
+                    _this3.setState({ mobileNavVisible: false });
                 });
             }
         }, {
@@ -12773,18 +12780,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         mobileNavVisible: false
                     });
                 }
-
                 console.log('you clicked me ... ' + this.state.mobileNavVisible);
             }
         }, {
             key: 'navigationLinks',
             value: function navigationLinks() {
                 var item = this.state.items.data;
+                var newClass = this.state.addClass;
                 var arrayMenu = [];
                 item.map(function (value, i) {
                     arrayMenu.push(_react2.default.createElement(
                         'li',
-                        { key: i },
+                        { className: 'nav-normal', key: i },
                         value.text,
                         ' - ',
                         value.url
@@ -12796,7 +12803,19 @@ document.addEventListener('DOMContentLoaded', function () {
             key: 'renderMobileNav',
             value: function renderMobileNav() {
                 if (this.state.mobileNavVisible) {
-                    return this.navigationLinks();
+                    var item = this.state.items.data;
+                    var newClass = this.state.addClass;
+                    var arrayMenu = [];
+                    item.map(function (value, i) {
+                        arrayMenu.push(_react2.default.createElement(
+                            'li',
+                            { key: i },
+                            value.text,
+                            ' - ',
+                            value.url
+                        ));
+                    });
+                    return arrayMenu;
                 }
             }
         }, {
@@ -12808,24 +12827,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     return _react2.default.createElement(
                         'div',
                         null,
+                        _react2.default.createElement('i', { onClick: function onClick(e) {
+                                return _this4.handleNavClick(e);
+                            }, className: 'fa fa-bars fa-2x', 'aria-hidden': 'true' }),
                         _react2.default.createElement(
-                            'p',
-                            { onClick: function onClick(e) {
-                                    return _this4.handleNavClick(e);
-                                } },
-                            _react2.default.createElement(
-                                'i',
-                                null,
-                                'mobile view - will be burger here'
-                            )
-                        ),
-                        this.renderMobileNav()
+                            'ul',
+                            { className: 'nav-mobile' },
+                            this.renderMobileNav()
+                        )
                     );
                 } else {
                     return _react2.default.createElement(
                         'div',
                         null,
-                        this.navigationLinks()
+                        _react2.default.createElement(
+                            'ul',
+                            null,
+                            this.navigationLinks()
+                        )
                     );
                 }
             }
@@ -12836,13 +12855,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     'div',
                     null,
                     _react2.default.createElement(
-                        'div',
+                        'nav',
                         null,
-                        _react2.default.createElement(
-                            'li',
-                            null,
-                            'Web Title'
-                        ),
                         this.renderNavigation()
                     )
                 );
