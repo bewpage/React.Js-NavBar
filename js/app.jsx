@@ -52,12 +52,13 @@ document.addEventListener('DOMContentLoaded', function(){
           console.log('you clicked me ... ' +  this.state.mobileNavVisible);
         };
 
+        //i have to clean code here to not repeat it...
         navigationLinks(){
             let item = this.state.items.data;
-            let newClass = this.state.addClass;
+            //let newClass = this.state.addClass;
             let arrayMenu = [];
             item.map((value, i)=>{
-                arrayMenu.push(<li className="nav-normal" key={i}>{value.text} - {value.url}</li>);
+                arrayMenu.push(<li className="li-normal" key={i}>{value.text}</li>);
             });
             return arrayMenu;
         }
@@ -65,10 +66,10 @@ document.addEventListener('DOMContentLoaded', function(){
         renderMobileNav() {
             if(this.state.mobileNavVisible){
                 let item = this.state.items.data;
-                let newClass = this.state.addClass;
+                //let newClass = this.state.addClass;
                 let arrayMenu = [];
                 item.map((value, i)=>{
-                    arrayMenu.push(<li key={i}>{value.text} - {value.url}</li>);
+                    arrayMenu.push(<li key={i}>{value.text}</li>);
                 });
                 return arrayMenu;
             }
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         renderNavigation() {
             if(this.state.windowWidth <= 800) {
-                return <div>
+                return <div className="mobile">
                             <i onClick={e=>this.handleNavClick(e)} className="fa fa-bars fa-2x" aria-hidden="true"></i>
                             <ul className="nav-mobile">
                                 {this.renderMobileNav()}
@@ -84,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     </div>
                 ;
             } else {
-                return <div>
+                return <div className="normal">
                             <ul>
                                 {this.navigationLinks()}
                             </ul>
@@ -94,13 +95,11 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         render() {
-            return (
-                <div>
-                    <nav>
-                        {this.renderNavigation()}
-                    </nav>
+            return <div>
+                        <nav>
+                            {this.renderNavigation()}
+                        </nav>
                 </div>
-            );
         }
     }
 

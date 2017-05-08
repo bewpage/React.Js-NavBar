@@ -12784,17 +12784,18 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, {
             key: 'navigationLinks',
+
+
+            //i have to clean code here to not repeat it...
             value: function navigationLinks() {
                 var item = this.state.items.data;
-                var newClass = this.state.addClass;
+                //let newClass = this.state.addClass;
                 var arrayMenu = [];
                 item.map(function (value, i) {
                     arrayMenu.push(_react2.default.createElement(
                         'li',
-                        { className: 'nav-normal', key: i },
-                        value.text,
-                        ' - ',
-                        value.url
+                        { className: 'li-normal', key: i },
+                        value.text
                     ));
                 });
                 return arrayMenu;
@@ -12804,15 +12805,13 @@ document.addEventListener('DOMContentLoaded', function () {
             value: function renderMobileNav() {
                 if (this.state.mobileNavVisible) {
                     var item = this.state.items.data;
-                    var newClass = this.state.addClass;
+                    //let newClass = this.state.addClass;
                     var arrayMenu = [];
                     item.map(function (value, i) {
                         arrayMenu.push(_react2.default.createElement(
                             'li',
                             { key: i },
-                            value.text,
-                            ' - ',
-                            value.url
+                            value.text
                         ));
                     });
                     return arrayMenu;
@@ -12826,7 +12825,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (this.state.windowWidth <= 800) {
                     return _react2.default.createElement(
                         'div',
-                        null,
+                        { className: 'mobile' },
                         _react2.default.createElement('i', { onClick: function onClick(e) {
                                 return _this4.handleNavClick(e);
                             }, className: 'fa fa-bars fa-2x', 'aria-hidden': 'true' }),
@@ -12839,7 +12838,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     return _react2.default.createElement(
                         'div',
-                        null,
+                        { className: 'normal' },
                         _react2.default.createElement(
                             'ul',
                             null,
