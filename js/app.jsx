@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function(){
             super(props);
             this.state = {
                 windowWidth: window.innerWidth,
+                windowBreakPoint: 500,
                 mobileNavVisible: false,
                 items: {data},
                 addClass: '',
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function(){
         }
 
         renderNavigation() {
-            if(this.state.windowWidth <= 800) {
+            if(this.state.windowWidth <= this.state.windowBreakPoint) {
                 return <div className="mobile">
                             <i onClick={e=>this.handleNavClick(e)} className="fa fa-bars fa-2x" aria-hidden="true"></i>
                             <ul className="nav-mobile">
@@ -86,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 ;
             } else {
                 return <div className="normal">
+                            <div className="brand-normal">Project Name</div>
                             <ul>
                                 {this.navigationLinks()}
                             </ul>

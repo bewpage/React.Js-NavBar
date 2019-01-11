@@ -33,18 +33,22 @@ nav {
     background: #646464; }
 
 .normal {
-  line-height: 35px; }
+  line-height: 35px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #ffffff; }
   .normal ul {
-    padding-left: 60px;
+    display: inline-block;
     margin: 0;
     line-height: 60px; }
 
+.brand-normal {
+  display: inline-block;
+  font-size: 1.3em; }
+
 .li-normal {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   cursor: pointer;
   display: inline-block;
-  padding: 0 2em;
-  color: #ffffff; }
+  padding: 0 2em; }
 
 .li-normal:hover {
   background: #646464; }

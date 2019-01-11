@@ -1,19 +1,30 @@
 //Konfiguracja Webpack
+const path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
-    entry: "./js/app.jsx",
-    output: { filename: "./js/out.js" },
+    mode: 'development',
+    entry: {
+        app: "./js/app.jsx"
+    },
+    devtool: 'inline-source-map',
     devServer: {
-        inline: true,
         contentBase: './',
         port: 3001
     },
+    output: {
+        filename: "./js/out.js",
+        path: path.resolve(__dirname, 'js')
+    },
     watch: true,
     module: {
-        loaders: [
+        rules: [
             {
-                test: /\.jsx$/, exclude: /node_modules/,
-                loader: 'babel-loader',
-                query: { presets: ['es2015', 'stage-2', 'react'] }
+                test: /\.jsx$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
             }
         ]
     }
